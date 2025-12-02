@@ -87,17 +87,16 @@ export const onRequestGet = async ({ request, env }) => {
 
   // Build testimonials list HTML
   // Handle multiple column name variations (lowercase first, then capitalized)
+  // Note: date is used for sorting but not displayed
   const testimonialsList = visibleTestimonials.length > 0
     ? visibleTestimonials.map((t, idx) => {
         const text = t.testimonial || t.Testimonial || '';
         const name = t.name || t.Name || '';
-        const date = formatDate(t.date || t.Date || '');
         
         return `
           <div class="testimonial-item" data-testimonial="${idx}">
             <p class="testimonial-text">${escapeHtml(text)}</p>
             <p class="testimonial-author">— ${escapeHtml(name)}</p>
-            ${date ? `<p class="testimonial-date">${escapeHtml(date)}</p>` : ''}
           </div>
         `;
       }).join('')
@@ -179,10 +178,11 @@ export const onRequestGet = async ({ request, env }) => {
       flex-shrink: 0;
     }
 
-    /* Top Navbar (non-sticky) */
+    /* Top Navbar (non-sticky) - Black background like footer */
     .top-navbar{
-      background: #ffffff;
-      border-bottom: 1px solid var(--mrf-border);
+      background: var(--mrf-primary);
+      color: #f9fafb;
+      border-bottom: 1px solid #020617;
       padding: 0;
     }
     .top-navbar .container{
@@ -194,7 +194,7 @@ export const onRequestGet = async ({ request, env }) => {
       padding: 0.75rem 1rem;
     }
     .top-navbar a{
-      color: var(--mrf-primary);
+      color: #ffffff;
       text-decoration: none;
       font-size: 0.9375rem;
       font-weight: 500;
@@ -203,19 +203,8 @@ export const onRequestGet = async ({ request, env }) => {
       transition: all 0.2s ease;
     }
     .top-navbar a:hover{
-      background: #f3f4f6;
-      color: var(--mrf-primary-700);
-    }
-    .top-navbar .search-box{
-      display: inline-flex;
-      align-items: center;
-      padding: 0.5rem 0.75rem;
-      border: 1px solid var(--mrf-border);
-      border-radius: 0.375rem;
-      background: #ffffff;
-      color: var(--mrf-subtle);
-      font-size: 0.9375rem;
-      cursor: not-allowed;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
     }
 
     /* Testimonials List Styles */
@@ -363,8 +352,9 @@ export const onRequestGet = async ({ request, env }) => {
         justify-content: flex-start;
       }
       .top-navbar .container{
-        flex-direction: column;
+        flex-direction: row;
         gap: 0.5rem;
+        justify-content: center;
       }
       .testimonials-container{
         margin: 1.5rem auto;
@@ -385,7 +375,7 @@ export const onRequestGet = async ({ request, env }) => {
   <!-- ===== MRF HEADER ===== -->
   <header class="z-10 bg-white shadow-xl">
     <div class="bg-white max-w-7xl mx-auto px-4 sm:px-6 py-3 border-b border-gray-200">
-      <div class="flex items-center justify-center md:justify-between">
+      <div class="flex items-center justify-between">
         <a href="https://www.mineralrightsforum.com" class="block w-fit">
           <img src="https://www.mineralrightsforum.com/uploads/db5755/original/3X/7/7/7710a47c9cd8492b1935dd3b8d80584938456dd4.jpeg"
                alt="Mineral Rights Forum Logo"
@@ -409,7 +399,6 @@ export const onRequestGet = async ({ request, env }) => {
       <a href="https://www.mineralrightsforum.com/latest">Latest Posts</a>
       <a href="https://www.mineralrightsforum.com/categories">Categories</a>
       <a href="https://www.mineralrightsforum.com/advertise">Advertise with Us</a>
-      <div class="search-box">Search</div>
     </div>
   </nav>
 
