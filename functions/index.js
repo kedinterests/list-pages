@@ -375,7 +375,7 @@ export const onRequestGet = async ({ request, env }) => {
   <!-- ===== MRF HEADER ===== -->
   <header class="z-10 bg-white shadow-xl">
     <div class="bg-white max-w-7xl mx-auto px-4 sm:px-6 py-3 border-b border-gray-200">
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-center md:justify-between">
         <a href="https://www.mineralrightsforum.com" class="block w-fit">
           <img src="https://www.mineralrightsforum.com/uploads/db5755/original/3X/7/7/7710a47c9cd8492b1935dd3b8d80584938456dd4.jpeg"
                alt="Mineral Rights Forum Logo"
