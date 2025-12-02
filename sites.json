@@ -1,0 +1,15 @@
+{
+  "testimonials.mineralrightsforum.com": {
+    "sheet": {
+      "type": "apps_script_json",
+      "url": "https://script.google.com/macros/s/YOUR_APPS_SCRIPT_URL/exec"
+    },
+    "page_title": "Testimonials",
+    "return_url": "https://www.mineralrightsforum.com",
+    "seo": {
+      "title": "Testimonials - Mineral Rights Forum",
+      "description": "Read testimonials from our community members about their experiences with the Mineral Rights Forum."
+    }
+  }
+}
+
