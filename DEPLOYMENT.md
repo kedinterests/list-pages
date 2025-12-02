@@ -112,7 +112,7 @@
      "testimonials.mineralrightsforum.com": {
        "sheet": {
          "type": "apps_script_json",
-         "url": "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"
+         "url": "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?sheetId=YOUR_SHEET_ID"
        },
        "page_title": "Testimonials",
        "return_url": "https://www.mineralrightsforum.com",
@@ -123,6 +123,16 @@
      }
    }
    ```
+   
+   **Important**: The URL must include:
+   - Your **Apps Script deployment ID** (the long string after `/macros/s/`)
+   - Your **Google Sheet ID** as a query parameter: `?sheetId=YOUR_SHEET_ID`
+   
+   To find your Sheet ID:
+   - Open your Google Sheet
+   - Look at the URL: `https://docs.google.com/spreadsheets/d/SHEET_ID_HERE/edit`
+   - Copy the `SHEET_ID_HERE` part and add it to the URL as `?sheetId=SHEET_ID_HERE`
+   
 3. Commit and push to trigger a new deployment
 
 ### 7. Test the Deployment
