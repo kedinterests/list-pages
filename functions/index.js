@@ -26,11 +26,14 @@ export const onRequestGet = async ({ request, env }) => {
   const allTestimonials = JSON.parse(raw);
 
   // Filter testimonials where Show/Hide = "Show"
-  const visibleTestimonials = allTestimonials.filter(t => 
-    (t['Show/Hide'] || t.show_hide || '').toString().trim().toLowerCase() === 'show'
-  );
+  // Handle multiple column name variations: show/hide, Show/Hide, show_hide
+  const visibleTestimonials = allTestimonials.filter(t => {
+    const showHide = t['show/hide'] || t['Show/Hide'] || t.show_hide || t['Show_Hide'] || '';
+    return showHide.toString().trim().toLowerCase() === 'show';
+  });
 
   // Sort by date (newest first)
+  // Handle multiple column name variations: date, Date
   visibleTestimonials.sort((a, b) => {
     const dateA = parseDate(a.date || a.Date || '');
     const dateB = parseDate(b.date || b.Date || '');
@@ -83,6 +86,7 @@ export const onRequestGet = async ({ request, env }) => {
   const schemaJson = JSON.stringify(schemaObject).replace(/</g, '\\u003c');
 
   // Build testimonials list HTML
+  // Handle multiple column name variations (lowercase first, then capitalized)
   const testimonialsList = visibleTestimonials.length > 0
     ? visibleTestimonials.map((t, idx) => {
         const text = t.testimonial || t.Testimonial || '';

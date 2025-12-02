@@ -157,6 +157,44 @@
    ```
 5. Refresh the page - testimonials should now appear
 
+**Troubleshooting 401 Unauthorized Error:**
+
+If you get a 401 error when calling `/refresh`, check:
+
+1. **Verify Environment Variable is Set:**
+   - Go to your Pages project → **Settings** → **Environment Variables**
+   - Make sure `REFRESH_KEY` exists and has a value
+   - Check which environment it's set for (Production, Preview, or both)
+   - If using a custom domain, make sure it's set for **Production**
+
+2. **Check for Exact Match:**
+   - Copy the value from Cloudflare (click the eye icon to reveal it)
+   - Make sure there are no extra spaces before or after
+   - The header value must match **exactly** (case-sensitive)
+
+3. **Verify Header Name:**
+   - Header must be exactly: `X-Refresh-Key` (capital X, capital R, capital K)
+   - Not `x-refresh-key` or `X-REFRESH-KEY`
+
+4. **Test with curl:**
+   ```bash
+   # Replace YOUR_DOMAIN and YOUR_KEY
+   curl -v -X POST https://YOUR_DOMAIN/refresh \
+     -H "X-Refresh-Key: YOUR_KEY_HERE" \
+     -H "Content-Type: application/json"
+   ```
+   The `-v` flag will show you the full request/response
+
+5. **Check Deployment:**
+   - Make sure you've deployed after setting the environment variable
+   - Environment variables require a new deployment to take effect
+   - Go to **Deployments** tab and trigger a new deployment if needed
+
+6. **Alternative: Use Cloudflare Dashboard:**
+   - You can also test via the Cloudflare dashboard
+   - Go to **Workers & Pages** → Your project → **Functions** → **Quick edit**
+   - This lets you test without worrying about headers
+
 ### 8. Set Up Automatic Refresh (Optional)
 
 You can set up a cron job or scheduled task to automatically refresh the data:
@@ -190,6 +228,59 @@ jobs:
 ```
 
 ## Troubleshooting
+
+### 502 Bad Gateway Error
+
+A 502 error means authentication worked, but there's an issue fetching or processing data from Google Sheets.
+
+**Step 1: Check the error details**
+1. Visit: `https://YOUR_DOMAIN/health`
+2. Look for `last_error` in the response - this will tell you what went wrong
+
+**Step 2: Test your Google Apps Script URL directly**
+1. Open your Apps Script URL in a browser:
+   ```
+   https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?sheetId=YOUR_SHEET_ID
+   ```
+2. You should see JSON output. If you see an error or HTML, that's the problem.
+
+**Step 3: Verify the data format**
+Your Apps Script must return JSON in this exact format:
+```json
+{
+  "ok": true,
+  "testimonials": [
+    {
+      "Testimonial": "Great service!",
+      "Name": "John Doe",
+      "Date": "2024-01-15",
+      "Show/Hide": "Show"
+    }
+  ],
+  "updated_at": "2024-01-15T12:00:00Z"
+}
+```
+
+**Common issues:**
+- **Apps Script returns HTML/error**: Check that your Apps Script is deployed correctly and accessible
+- **Missing "ok": true**: Your Apps Script must return `"ok": true` in the response
+- **Wrong property name**: Must be `testimonials` (lowercase), not `Testimonials` or `testimonial`
+- **Not an array**: The `testimonials` value must be an array `[]`, not an object `{}`
+- **CORS issues**: Make sure your Apps Script deployment allows "Anyone" to execute
+
+**Step 4: Check Apps Script deployment**
+1. In Google Apps Script, go to **Deploy** → **Manage deployments**
+2. Make sure deployment is set to:
+   - **Execute as**: Me (your account)
+   - **Who has access**: Anyone (or "Anyone with Google account" if you want to restrict)
+3. The URL should end with `/exec` (not `/dev`)
+
+**Step 5: Verify column names**
+Your Google Sheet should have these columns (case-sensitive):
+- `Testimonial` (or `testimonial`)
+- `Name` (or `name`)
+- `Date` (or `date`)
+- `Show/Hide` (or `show_hide`)
 
 ### "No data yet" error
 - Make sure you've called the `/refresh` endpoint at least once
