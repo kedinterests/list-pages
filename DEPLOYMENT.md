@@ -10,16 +10,39 @@
 
 ### 1. Create KV Namespace
 
+**Option A: From Workers & Pages Overview**
 1. Log into Cloudflare Dashboard
-2. Go to **Workers & Pages** → **KV**
+2. Go to **Workers & Pages** (in the left sidebar)
+3. Look for **KV** in the submenu or tabs at the top
+4. If you see **KV**, click it, then click **Create a namespace**
+5. Name it: `TESTIMONIALS_KV`
+6. Click **Add** or **Create**
+
+**Option B: From Workers & Pages → Overview**
+1. Go to **Workers & Pages** → **Overview**
+2. Look for a **KV** section or tab
+3. Click **Create a namespace** or **Add namespace**
+4. Name it: `TESTIMONIALS_KV`
+5. Click **Add** or **Create**
+
+**Option C: Direct URL**
+1. Navigate directly to: `https://dash.cloudflare.com/[your-account-id]/workers/kv/namespaces`
+2. Replace `[your-account-id]` with your account ID (found in the URL when you're in the dashboard)
 3. Click **Create a namespace**
 4. Name it: `TESTIMONIALS_KV`
 5. Click **Add**
-6. **Note the namespace ID** (you'll need it later)
+
+**Option D: If you can't find KV at all**
+- KV namespaces can also be created from within a Pages project (see Step 3 below)
+- You can skip this step for now and create the KV namespace when configuring the Pages project bindings
+
+**Note the namespace ID** after creation (you'll see it in the namespace list)
 
 ### 2. Create Pages Project
 
-1. Go to **Workers & Pages** → **Pages**
+**IMPORTANT**: Make sure you're creating a **Pages** project, NOT a Worker project!
+
+1. Go to **Workers & Pages** → **Pages** (NOT Workers)
 2. Click **Create a project**
 3. Choose **Connect to Git** (recommended) or **Upload assets**
 4. If connecting to Git:
@@ -29,20 +52,29 @@
 5. Configure build settings:
    - **Project name**: `testimonials-pages` (or your preferred name)
    - **Production branch**: `main` (or your default branch)
-   - **Framework preset**: None
-   - **Build command**: (leave empty)
-   - **Build output directory**: (leave empty)
-6. Click **Save and Deploy**
+   - **Framework preset**: **None** (or "None" from dropdown)
+   - **Build command**: **DELETE/REMOVE** any default value - leave it completely empty
+   - **Build output directory**: **DELETE/REMOVE** any default value - leave it completely empty
+   - **Root directory**: (leave as `/` - default)
+6. **DO NOT** add any "Deploy command" or "Wrangler" settings
+7. Click **Save and Deploy**
+
+**Troubleshooting**: If you see `npx wrangler deploy` in the logs, you've accidentally created a Worker project. Delete it and create a new **Pages** project instead.
 
 ### 3. Configure KV Namespace Binding
+
+**Note**: If you couldn't find KV in Step 1, you can create the namespace here instead!
 
 1. In your Pages project, go to **Settings** → **Functions**
 2. Scroll down to **KV Namespace Bindings**
 3. Click **Add binding**
-4. Configure:
+4. If you see **"Create a new namespace"** or **"Add namespace"** link, click it:
+   - Name it: `TESTIMONIALS_KV`
+   - Click **Create** or **Add**
+5. Configure the binding:
    - **Variable name**: `TESTIMONIALS_KV` (must match exactly)
-   - **KV namespace**: Select `TESTIMONIALS_KV` from dropdown
-5. Click **Save**
+   - **KV namespace**: Select `TESTIMONIALS_KV` from dropdown (or the namespace you just created)
+6. Click **Save**
 
 ### 4. Set Environment Variables
 
@@ -56,7 +88,7 @@
      openssl rand -hex 32
      
      # Or use an online generator:
-     # https://www.random.org/strings/
+     # https   ://www.random.org/strings/
      ```
    - **Environment**: Select **Production** (and **Preview** if you want it there too)
 4. Click **Save**

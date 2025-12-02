@@ -1,8 +1,5 @@
 {
   "name": "testimonials-pages",
-  "private": true,
-  "scripts": {
-    "build": "echo 'No build step required'"
-  }
+  "private": true
 }
 
