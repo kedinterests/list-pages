@@ -516,4 +516,3 @@ export const onRequestGet = async ({ request, env }) => {
 };
 
 function html(status, body){ return new Response(body, { status, headers: { 'content-type': 'text/html; charset=utf-8' } }); }
-
