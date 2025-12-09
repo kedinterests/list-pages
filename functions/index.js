@@ -165,89 +165,14 @@ export const onRequestGet = async ({ request, env }) => {
       flex-wrap: wrap;
       gap: 1rem;
     }
-    .mrf-header-left{
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex: 1;
-      min-width: 0;
-    }
     .mrf-logo-link{
-      display: flex;
-      align-items: center;
+      display: block;
       text-decoration: none;
-      gap: 0.75rem;
     }
     .mrf-logo-img{
       height: 3rem;
       width: auto;
       border-radius: 0.5rem;
-      flex-shrink: 0;
-    }
-    .mrf-header-text{
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-    .mrf-header-title{
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: #111827;
-      margin: 0;
-      font-family: Georgia, 'Times New Roman', serif;
-      line-height: 1.2;
-    }
-    .mrf-header-tagline{
-      font-size: 0.875rem;
-      color: #6b7280;
-      margin: 0;
-      font-style: italic;
-    }
-    .mrf-header-right{
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-shrink: 0;
-    }
-    .mrf-anniversary-badge{
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-      border: 3px solid #000000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0.5rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      flex-shrink: 0;
-    }
-    .mrf-anniversary-text{
-      font-size: 0.625rem;
-      font-weight: 700;
-      color: #000000;
-      line-height: 1.1;
-      margin: 0;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .mrf-anniversary-years{
-      font-size: 1rem;
-      font-weight: 900;
-      color: #000000;
-      line-height: 1;
-      margin: 0.125rem 0 0 0;
-    }
-    .mrf-anniversary-forum{
-      font-size: 0.5rem;
-      font-weight: 700;
-      color: #000000;
-      line-height: 1;
-      margin: 0.125rem 0 0 0;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
     }
     .header-back-btn{
       display: inline-flex;
@@ -282,28 +207,8 @@ export const onRequestGet = async ({ request, env }) => {
         flex-direction: column;
         align-items: flex-start;
       }
-      .mrf-header-left{
-        width: 100%;
-      }
-      .mrf-header-right{
-        width: 100%;
-        justify-content: space-between;
-      }
-      .mrf-header-title{
-        font-size: 1.5rem;
-      }
-      .mrf-anniversary-badge{
-        width: 70px;
-        height: 70px;
-      }
-      .mrf-anniversary-years{
-        font-size: 0.875rem;
-      }
-      .mrf-anniversary-text{
-        font-size: 0.5625rem;
-      }
-      .mrf-anniversary-forum{
-        font-size: 0.4375rem;
+      .mrf-header-content .header-back-btn{
+        align-self: flex-end;
       }
     }
 
@@ -343,8 +248,8 @@ export const onRequestGet = async ({ request, env }) => {
       padding: 0 1rem;
     }
     .testimonial-item{
-      margin-bottom: 2.5rem;
-      padding-bottom: 2rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
       border-bottom: 1px solid var(--mrf-border);
     }
     .testimonial-item:last-child{
@@ -355,7 +260,7 @@ export const onRequestGet = async ({ request, env }) => {
       font-size: 1.125rem;
       line-height: 1.7;
       color: #374151;
-      margin: 0 0 1rem 0;
+      margin: 0 0 0.5rem 0;
       font-style: italic;
     }
     .testimonial-author{
@@ -490,8 +395,8 @@ export const onRequestGet = async ({ request, env }) => {
         padding: 0 1rem;
       }
       .testimonial-item{
-        margin-bottom: 2rem;
-        padding-bottom: 1.5rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
       }
       .testimonial-text{
         font-size: 1rem;
@@ -504,31 +409,18 @@ export const onRequestGet = async ({ request, env }) => {
   <!-- ===== MRF HEADER ===== -->
   <header class="mrf-header">
     <div class="mrf-header-content">
-      <div class="mrf-header-left">
-        <a href="https://www.mineralrightsforum.com" class="mrf-logo-link">
-          <img src="https://www.mineralrightsforum.com/uploads/db5755/original/3X/7/7/7710a47c9cd8492b1935dd3b8d80584938456dd4.jpeg"
-               alt="Mineral Rights Forum Logo"
-               class="mrf-logo-img"
-               onerror="this.onerror=null;this.src='https://placehold.co/150x40/d1d5db/4b5563?text=MRF+Logo'">
-          <div class="mrf-header-text">
-            <h1 class="mrf-header-title">The Mineral Rights Forum</h1>
-            <p class="mrf-header-tagline">Conversation for America's Mineral Owners</p>
-          </div>
-        </a>
-      </div>
-      <div class="mrf-header-right">
-        <div class="mrf-anniversary-badge">
-          <p class="mrf-anniversary-text">Celebrating</p>
-          <p class="mrf-anniversary-years">15 Years</p>
-          <p class="mrf-anniversary-forum">The Mineral Rights Forum</p>
-        </div>
-        <button class="header-back-btn" id="returnBtn" data-return-url="${return_url ? escapeAttr(return_url) : 'https://www.mineralrightsforum.com'}">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M19 12H5M12 19l-7-7 7-7"/>
-          </svg>
-          <span>Back to Forum</span>
-        </button>
-      </div>
+      <a href="https://www.mineralrightsforum.com" class="mrf-logo-link">
+        <img src="https://www.mineralrightsforum.com/uploads/db5755/original/3X/7/7/7710a47c9cd8492b1935dd3b8d80584938456dd4.jpeg"
+             alt="Mineral Rights Forum Logo"
+             class="mrf-logo-img"
+             onerror="this.onerror=null;this.src='https://placehold.co/150x40/d1d5db/4b5563?text=MRF+Logo'">
+      </a>
+      <button class="header-back-btn" id="returnBtn" data-return-url="${return_url ? escapeAttr(return_url) : 'https://www.mineralrightsforum.com'}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>Back to Forum</span>
+      </button>
     </div>
   </header>
 
