@@ -144,8 +144,8 @@ export const onRequestGet = async ({ request, env }) => {
       --mrf-accent: #f59e0b;        /* amber-500 */
       --mrf-accent-600: #d97706;    /* amber-600 */
     }
-    html{ scroll-behavior:smooth; }
-    body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;color:#111;line-height:1.5}
+    html{ scroll-behavior:smooth; margin: 0; padding: 0; }
+    body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;color:#111;line-height:1.5; margin: 0; padding: 0; }
     .container{max-width:1280px;margin:0 auto;padding:1rem}
     
     /* Header Styles */
@@ -241,7 +241,8 @@ export const onRequestGet = async ({ request, env }) => {
       align-items: center;
       justify-content: center;
       gap: 1rem;
-      padding: 0.75rem 1rem;
+      padding: 0.75rem 2rem;
+      max-width: 100%;
     }
     .top-navbar a{
       color: #ffffff;
@@ -315,12 +316,16 @@ export const onRequestGet = async ({ request, env }) => {
     }
     .footer-content{
       max-width: 100%;
-      padding: 0 2rem;
+      padding: 0;
       display: flex;
       flex-wrap: wrap;
       gap: 2rem;
       justify-content: space-between;
       align-items: flex-start;
+    }
+    .footer-left,
+    .footer-right{
+      padding: 0 2rem;
     }
     .footer-left{
       flex: 0 0 auto;
@@ -440,15 +445,18 @@ export const onRequestGet = async ({ request, env }) => {
         height: 20px;
       }
       footer{
-      footer{
         padding: 2rem 0;
       }
       .footer-content{
         flex-direction: column;
         gap: 1.5rem;
-        padding: 0 1.5rem;
+        padding: 0;
         align-items: center;
         text-align: center;
+      }
+      .footer-left,
+      .footer-right{
+        padding: 0 1.5rem;
       }
       .footer-left{
         text-align: center;
@@ -472,6 +480,7 @@ export const onRequestGet = async ({ request, env }) => {
         flex-direction: row;
         gap: 0.5rem;
         justify-content: center;
+        padding: 0.75rem 1rem;
       }
       .testimonials-container{
         margin: 1.5rem auto;
