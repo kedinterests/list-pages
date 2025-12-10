@@ -293,6 +293,7 @@ export const onRequestGet = async ({ request, env }) => {
       line-height: 1.6;
       margin: 0 0 2rem 0;
       padding: 0 1rem;
+      font-weight: 700;
     }
     .testimonial-date{
       font-size: 0.875rem;
@@ -537,7 +538,7 @@ export const onRequestGet = async ({ request, env }) => {
     <div class="footer-content">
       <div class="footer-left">
         <h3>The Mineral Rights Forum</h3>
-        <p>&copy; ${new Date().getFullYear()} The Mineral Rights Forum,<br>All Rights Reserved</p>
+        <p>&copy; ${new Date().getFullYear()} All Rights Reserved</p>
       </div>
       <div class="footer-right">
         <ul class="footer-menu">
