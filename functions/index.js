@@ -207,9 +207,15 @@ export const onRequestGet = async ({ request, env }) => {
          flex-direction: column;
          align-items: center;
          justify-content: center;
+         padding: 1rem;
        }
        .mrf-header-content .header-back-btn{
          display: none;
+       }
+       .mrf-logo-img{
+         max-width: 100%;
+         height: auto;
+         max-height: 3rem;
        }
      }
 
@@ -394,12 +400,12 @@ export const onRequestGet = async ({ request, env }) => {
       .footer-menu{
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 1rem;
+        gap: 0.5rem 0.75rem;
         justify-content: center;
-        max-width: 400px;
+        max-width: 100%;
       }
       .footer-menu li{
-        flex: 0 0 calc(50% - 0.5rem);
+        flex: 0 0 auto;
         text-align: center;
       }
       .top-navbar .container{
