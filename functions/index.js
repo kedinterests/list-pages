@@ -96,7 +96,7 @@ export const onRequestGet = async ({ request, env }) => {
         return `
           <div class="testimonial-item" data-testimonial="${idx}">
             <p class="testimonial-text">${escapeHtml(text)}</p>
-            <p class="testimonial-author">— ${escapeHtml(name)}</p>
+            <p class="testimonial-author">${escapeHtml(name)}</p>
           </div>
         `;
       }).join('')
@@ -269,6 +269,14 @@ export const onRequestGet = async ({ request, env }) => {
       color: var(--mrf-primary);
       margin: 0 0 0.25rem 0;
     }
+    .testimonials-intro{
+      text-align: center;
+      color: #374151;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0 0 2rem 0;
+      padding: 0 1rem;
+    }
     .testimonial-date{
       font-size: 0.875rem;
       color: var(--mrf-subtle);
@@ -439,6 +447,7 @@ export const onRequestGet = async ({ request, env }) => {
     <h1 style="font-size: 2rem; font-weight: 700; margin: 2rem 0 1.5rem 0; color: var(--mrf-primary); text-align: center;">
       ${escapeHtml(page_title || 'Testimonials')}
     </h1>
+    <p class="testimonials-intro">Following are unprompted comments and statements sourced directly from posts here on The Mineral Rights Forum.</p>
     ${testimonialsList}
   </main>
 
