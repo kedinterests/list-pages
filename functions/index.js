@@ -152,8 +152,9 @@ export const onRequestGet = async ({ request, env }) => {
     .mrf-header{
       background: #ffffff;
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      position: relative;
-      z-index: 10;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     .mrf-header-content{
       max-width: 1280px;
@@ -219,12 +220,20 @@ export const onRequestGet = async ({ request, env }) => {
        }
      }
 
-    /* Top Navbar (non-sticky) - Black background like footer */
+    /* Top Navbar (sticky) - Black background like footer */
     .top-navbar{
       background: var(--mrf-primary);
       color: #f9fafb;
       border-bottom: 1px solid #020617;
       padding: 0;
+      position: sticky;
+      top: 80px;
+      z-index: 99;
+    }
+    @media (max-width: 767px){
+      .top-navbar{
+        top: 70px;
+      }
     }
     .top-navbar .container{
       display: flex;
@@ -379,7 +388,58 @@ export const onRequestGet = async ({ request, env }) => {
       width: 20px;
       height: 20px;
     }
+
+    /* Scroll to Top Button */
+    .scroll-to-top{
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--mrf-primary);
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+      z-index: 50;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background 0.2s ease;
+    }
+    .scroll-to-top.visible{
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .scroll-to-top:hover{
+      background: var(--mrf-primary-700);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,.2);
+    }
+    .scroll-to-top:active{
+      transform: translateY(0);
+    }
+    .scroll-to-top svg{
+      width: 24px;
+      height: 24px;
+    }
     @media (max-width: 767px){
+      .scroll-to-top{
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 44px;
+        height: 44px;
+      }
+      .scroll-to-top svg{
+        width: 20px;
+        height: 20px;
+      }
+      footer{
       footer{
         padding: 2rem 0;
       }
@@ -501,6 +561,13 @@ export const onRequestGet = async ({ request, env }) => {
     </div>
   </footer>
 
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+  </button>
+
   <script>
   document.addEventListener('DOMContentLoaded', () => {
     // Handle return button click - navigate to return_url from site config
@@ -510,6 +577,34 @@ export const onRequestGet = async ({ request, env }) => {
       returnBtn.addEventListener('click', () => {
         window.location.href = returnUrl;
       });
+    }
+
+    // Scroll to Top Button
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    if (scrollToTopBtn) {
+      // Show/hide button based on scroll position
+      function toggleScrollToTop() {
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollY > 300) {
+          scrollToTopBtn.classList.add('visible');
+        } else {
+          scrollToTopBtn.classList.remove('visible');
+        }
+      }
+      
+      // Scroll to top on click
+      scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+      
+      // Listen for scroll events
+      window.addEventListener('scroll', toggleScrollToTop, { passive: true });
+      
+      // Check initial scroll position
+      toggleScrollToTop();
     }
   });
   </script>
